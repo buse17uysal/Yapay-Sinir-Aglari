@@ -2,11 +2,10 @@ import pandas as pd
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from keras.layers import Dense 
+from keras.layers import Dense, Activation
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 from sklearn.linear_model import LinearRegression
-
 
 dataset = pd.read_csv("housing.csv",delim_whitespace=True)
 
@@ -21,14 +20,19 @@ x_train, x_test, y_train, y_test = train_test_split(X,Y,test_size=0.2,random_sta
 input_num = x_train.shape[1]
 output_num = 1
 
-model = Sequential()
     
-model.add(Dense(8,input_dim = input_num,activation = 'relu'))
-model.add(Dense(8,activation = 'relu'))
-model.add(Dense(4,activation = 'relu'))
+model = Sequential()
+
+model.add(Dense(8, input_dim=input_num))
+model.add(Activation('sigmoid'))
+model.add(Dense(8))
+model.add(Activation('sigmoid'))
+model.add(Dense(4))
+model.add(Activation('sigmoid'))
 model.add(Dense(output_num))
 
 model.summary()
+
 
 
 model.compile(optimizer='adam',loss='mse')
@@ -71,7 +75,7 @@ layers = ["Girdi (13)", "Gizli 1 (8)", "Gizli 2 (8)", "Gizli 3 (4)", "Çıkış 
 neurons = [13, 8, 8, 4, 1]
 
 # Diyagram oluşturma
-plt.figure(figsize=(8, 6))  # Boyutları değiştirildi
+plt.figure(figsize=(8, 6))  
 layer_distance = 1
 neuron_distance = 1
 
@@ -82,10 +86,10 @@ for i, layer in enumerate(layers):
         y = j * neuron_distance
         plt.scatter(x, y, color='blue', zorder=2)  # Nöronları çiz
         
-        # Gizli katmanlarda ReLU aktivasyon fonksiyonunu göster
+        # Gizli katmanlarda sigmoid aktivasyon fonksiyonunu göster
         if "Gizli" in layer:
-            plt.gca().add_patch(plt.Rectangle((x - 0.15, y - 0.15), 0.3, 0.3, linewidth=1, edgecolor='black', facecolor='red'))  # Kare boyutu küçültüldü
-            plt.text(x, y, "ReLU", fontsize=8, ha='center', va='center', color='white', zorder=3)
+            plt.gca().add_patch(plt.Rectangle((x - 0.15, y - 0.15), 0.3, 0.3, linewidth=1, edgecolor='black', facecolor='red')) 
+            plt.text(x, y, "Sigmoid", fontsize=8, ha='center', va='center', color='white', zorder=3)
         
         # Bağlantıları çiz (katmanlar arasında)
         if i > 0:
