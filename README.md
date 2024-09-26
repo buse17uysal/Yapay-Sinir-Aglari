@@ -27,3 +27,11 @@ pip install --default-timeout=10000 tensorflow
 ```
 
 ## **Çıktılar**
+### Epochs Grafiği
+![](ciktilar/epochs)
+
+### Lineer Regresyon Grafiği
+![](ciktilar/lineer)
+
+### MLP Çizelgesi
+![](ciktilar/mlp)
