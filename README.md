@@ -33,5 +33,5 @@ pip install --default-timeout=10000 tensorflow
 ### Lineer Regresyon Grafiği
 ![](ciktilar/lineer.png)
 
-### MLP Çizelgesi
+### MLP Diyagramı
 ![](ciktilar/mlp.png)
